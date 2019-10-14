@@ -1,24 +1,43 @@
 #!/bin/bash
 
-TAG=$(echo "2.0.0")
+TAG=$(git tag -l '[0-9].*' | tail -n1)
+IMAGENAME=''
 
 echo $TAG > VERSIONFILE
 
-if [ ${2^^} = "MAJOR" ];
+var=$(<VERSIONFILE)
+
+if [ -z "$var" ]
 then
-    NEW_VERSION=$(cat VERSIONFILE |  awk -F'.' '{++$1} {gsub(" ", ".")} {print $0}')
-elif [ ${2^^} = 'MIRROR' ];
-then
-    NEW_VERSION=$(cat VERSIONFILE |  awk -F'.' '{++$2} {gsub(" ", ".")} {print $0}')
-elif [ ${2^^} = 'PATH' ];
-then
-    NEW_VERSION=$(cat VERSIONFILE |  awk -F'.' '{++$3} {gsub(" ", ".")} {print $0}')
+    echo "0.0.1" > VERSIONFILE
+    NEWVERSION=$(cat VERSIONFILE)     
 else
-    echo 'argument not is valid'
+    if [ ${1^^} = "MAJOR" ];
+    then
+        NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$1} {gsub(" ", ".")} {print $0}')
+    elif [ ${1^^} = 'MIRROR' ];
+    then
+        NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$2} {gsub(" ", ".")} {print $0}')
+    elif [ ${1^^} = 'PATH' ];
+    then
+        NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$3} {gsub(" ", ".")} {print $0}')
+    else
+        echo 'argument not is valid'
+        rm -f VERSIONFILE
+        exit
+    fi
 fi
 
+rm -f VERSIONFILE
 
-# git push origin
-# git push origin $NEW_VERSION
+echo $NEWVERSION
 
-echo $NEW_VERSION
+# git push origin $(git rev-parse --abbrev-ref HEAD)
+git tag $NEWVERSION
+# git push origin $NEWVERSION
+
+# FULLINAGENAME=$IMAGENAME:$NEWVERSION
+
+# docker login -u -p
+# docker build -t FULLINAGENAME .
+# docker push FULLINAGENAME
