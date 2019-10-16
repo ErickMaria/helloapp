@@ -1,9 +1,4 @@
 stages:
-- name: Build
-  steps:
-  - runScriptConfig:
-      image: golang:1.12.7-alpine
-      shellScript: go build -o Helloapp -ldflags '-libgcc=none' .
 - name: Publish
   steps:
   - publishImageConfig:
