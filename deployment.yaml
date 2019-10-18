@@ -2,11 +2,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: helloapp
+  name: helloapp-service
 spec:
   selector:
     app: helloapp
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8081
