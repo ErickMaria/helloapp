@@ -4,9 +4,9 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: labiesp/helloapp:${CICD_EXECUTION_SEQUENCE}
+      tag: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
-      registry: index.docker.io
+      registry: 127.0.0.1:34101
 - name: Deploy
   steps:
   - applyYamlConfig:
