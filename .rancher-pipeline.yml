@@ -1,1 +1,10 @@
+stages:
+- name: Publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
+      registry: 127.0.0.1:34430
+timeout: 60
 notification: {}
