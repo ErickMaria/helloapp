@@ -5,7 +5,6 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
-      registry: 127.0.0.1:34101
 - name: Deploy
   steps:
   - applyYamlConfig:
