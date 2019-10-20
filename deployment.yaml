@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: helloapp-service
+  namespace: application
 spec:
   selector:
     app: helloapp
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloapp
+  namespace: application
   labels:
     app: helloapp
 spec:
