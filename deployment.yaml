@@ -32,7 +32,7 @@ spec:
         app: helloapp
     spec:
       imagePullSecrets:
-      - name: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
       containers:
       - name: helloapp
         image: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
