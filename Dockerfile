@@ -8,4 +8,8 @@ FROM scratch AS final
 COPY --from=builder /build /app
 WORKDIR /app
 EXPOSE 8081
+<<<<<<< HEAD
 ENTRYPOINT ["./Helloapp"]
+=======
+ENTRYPOINT ["./Helloapp"]
+>>>>>>> b8df188eb64c3915d5ac424cf249d98f0b0f6a06

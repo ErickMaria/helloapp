@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: helloapp-service
+  namespace: application
 spec:
   selector:
     app: helloapp
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloapp
+  namespace: application
   labels:
     app: helloapp
 spec:
@@ -30,9 +32,9 @@ spec:
         app: helloapp
     spec:
       imagePullSecrets:
-      - name: helloapp:${CICD_EXECUTION_SEQUENCE}
+      - name: pipeline-docker-registry
       containers:
-      - name: helloapp
-        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
+        image: ${CICD_GIT_REPO_NAME}:${CICD_EXECUTION_SEQUENCE}
         ports:
         - containerPort: 8081
