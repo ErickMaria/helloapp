@@ -14,8 +14,8 @@ stages:
         {print $0}')\n    else\n        echo 'argument not is valid'\n        rm -f
         VERSIONFILE\n        exit\n    fi\nfi\n\nrm -f VERSIONFILE\n\necho $NEWVERSION\n\n#
         git push origin $(git rev-parse --abbrev-ref HEAD)\ngit tag $NEWVERSION\n\ngit
-        push origin https://erckmaria:erickgithub08@github.com/helloapp.git $NEWVERSION\ngit
-        push  "
+        push origin https://erckmaria:erickgithub08@github.com/erickmaria/helloapp.git
+        $NEWVERSION\ngit push  "
 - name: Publish
   steps:
   - publishImageConfig:
