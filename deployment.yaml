@@ -2,6 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+  namespace: application
 spec:
   selector:
     app: ${CICD_GIT_REPO_NAME}
@@ -15,6 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+  namespace: application
   labels:
     app: ${CICD_GIT_REPO_NAME}
 spec:
