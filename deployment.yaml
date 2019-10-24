@@ -5,7 +5,7 @@ metadata:
   namespace: application
 spec:
   selector:
-    app: ${CICD_GIT_REPO_NAME}
+    app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
   type: ClusterIP
   ports:
     - protocol: TCP
@@ -18,16 +18,16 @@ metadata:
   name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
   namespace: application
   labels:
-    app: ${CICD_GIT_REPO_NAME}
+    app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${CICD_GIT_REPO_NAME}
+      app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
   template:
     metadata:
       labels:
-        app: ${CICD_GIT_REPO_NAME}
+        app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
     spec:
       imagePullSecrets:
       - name: pipeline-docker-registry
