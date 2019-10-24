@@ -1,36 +1,36 @@
-    kind: Service
-    apiVersion: v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellopp-service
+spec:
+  selector:
+    app: hellopp
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-hellopp
+  labels:
+    app: hellopp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellopp
+  template:
     metadata:
-    name: hellopp-service
-    spec:
-    selector:
-        app: hellopp
-    type: NodePort
-    ports:
-        - protocol: TCP
-        port: 8081
-        targetPort: 8081
-    ---
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-    name: hellopp
-    labels:
+      labels:
         app: hellopp
     spec:
-    replicas: 1
-    selector:
-        matchLabels:
-        app: hellopp
-    template:
-        metadata:
-        labels:
-            app: hellopp
-        spec:
-        imagePullSecrets:
-        - name: pipeline-docker-registry
-        containers:
-        - name: ${CICD_IMAGE}-v${CICD_EXECUTION_SEQUENCE}
-            image: ${CICD_IMAGE}:v${CICD_EXECUTION_SEQUENCE}
-            ports:
-            - containerPort: 8081
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+      - name: ${CICD_IMAGE}-v${CICD_EXECUTION_SEQUENCE
+        image: ${CICD_IMAGE}:v${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 8081
