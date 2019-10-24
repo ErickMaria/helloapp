@@ -2,8 +2,12 @@ stages:
 - name: Build
   steps:
   - runScriptConfig:
-      image: gcc:latest
-      shellScript: go build -o HelloApp ./main.go
+      image: golang:1.13.3
+      shellScript: |-
+        mkdir -p /go/src/github.com/erickmaria
+        ln -s `pwd` /go/src/github.com/erickmaria/helloapp
+        cd /go/src/github.com/erickmaria/helloapp
+        go build -o bin/helloapp
 - name: Publish
   steps:
   - publishImageConfig:
