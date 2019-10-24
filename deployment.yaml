@@ -14,7 +14,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${CICD_IMAGE}-v${CICD_EXECUTION_SEQUENCE}
+  name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
   labels:
     app: hellopp
 spec:
