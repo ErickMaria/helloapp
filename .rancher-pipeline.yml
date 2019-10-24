@@ -3,19 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: gcc:latest
-      shellScript: "TAG=$(git tag -l '[0-9].*' | tail -n1)\nIMAGENAME=''\n\necho $TAG
-        > VERSIONFILE\n\nvar=$(<VERSIONFILE)\n\nif [ -z \"$var\" ]\nthen\n    echo
-        \"0.0.1\" > VERSIONFILE\n    NEWVERSION=$(cat VERSIONFILE)     \nelse\n    if
-        [ ${1^^} = \"MAJOR\" ];\n    then\n        NEWVERSION=$(cat VERSIONFILE |
-        \ awk -F'.' '{++$1} {gsub(\" \", \".\")} {print $0}')\n    elif [ ${1^^} =
-        'MIRROR' ];\n    then\n        NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$2}
-        {gsub(\" \", \".\")} {print $0}')\n    elif [ ${1^^} = 'PATH' ];\n    then\n
-        \       NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$3} {gsub(\" \", \".\")}
-        {print $0}')\n    else\n        echo 'argument not is valid'\n        rm -f
-        VERSIONFILE\n        exit\n    fi\nfi\n\nrm -f VERSIONFILE\n\necho $NEWVERSION\n\n#
-        git push origin $(git rev-parse --abbrev-ref HEAD)\ngit tag $NEWVERSION\n\ngit
-        push origin https://erckmaria:erickgithub08@github.com/erickmaria/helloapp.git
-        $NEWVERSION\ngit push  "
+      shellScript: go build -o HelloApp ./main.go
 - name: Publish
   steps:
   - publishImageConfig:
