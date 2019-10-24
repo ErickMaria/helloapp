@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: hellopp-service
+  name: hellopp
 spec:
   selector:
     app: hellopp
