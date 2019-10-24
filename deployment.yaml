@@ -30,7 +30,7 @@
         imagePullSecrets:
         - name: pipeline-docker-registry
         containers:
-        - name: hellopp
-            image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        - name: ${CICD_IMAGE}-v${CICD_EXECUTION_SEQUENCE}
+            image: ${CICD_IMAGE}:v${CICD_EXECUTION_SEQUENCE}
             ports:
             - containerPort: 8081
