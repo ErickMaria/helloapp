@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: ${CICD_GIT_REPO_NAME}
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8081
