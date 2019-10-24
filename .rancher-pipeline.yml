@@ -13,8 +13,9 @@ stages:
         \       NEWVERSION=$(cat VERSIONFILE |  awk -F'.' '{++$3} {gsub(\" \", \".\")}
         {print $0}')\n    else\n        echo 'argument not is valid'\n        rm -f
         VERSIONFILE\n        exit\n    fi\nfi\n\nrm -f VERSIONFILE\n\necho $NEWVERSION\n\n#
-        git push origin $(git rev-parse --abbrev-ref HEAD)\ngit tag $NEWVERSION\ngit
-        push origin $NEWVERSION"
+        git push origin $(git rev-parse --abbrev-ref HEAD)\ngit tag $NEWVERSION\n\ngit
+        push origin https://erckmaria:erickgithub08@helloapp.git $NEWVERSION\ngit
+        push  "
 - name: Publish
   steps:
   - publishImageConfig:
