@@ -19,12 +19,10 @@ stages:
   steps:
   - runScriptConfig:
       image: golang:latest
-      shellScript: |-
-        curl -k -s -X POST \
-          https://23.100.28.108/v3/clusters/c-7f9bf/namespaces \
-          -H 'Authorization: Bearer p-sr6dq-pipeline:j9hvp29khnmxgjktcwmlgcg6f4b6pz9h6fj45m45z88qhxgl2wc447' \
-          -H 'Content-Type: application/json' \
-          -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-7f9bf:p-sr6dq", "resourceQuota":null}'
+      shellScript: "curl -k -u \"token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc\"
+        \\\n-X POST \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json'
+        \\\n-d '{\"containerDefaultResourceLimit\":null, \"name\":\"${CICD_EXECUTION_SEQUENCE}\",
+        \"projectId\":\"\", \"resourceQuota\":null}' \\\n'https://23.100.28.108/v3/cluster/c-7f9bf/namespaces' "
   - applyYamlConfig:
       path: ./deployment.yaml
 timeout: 60
