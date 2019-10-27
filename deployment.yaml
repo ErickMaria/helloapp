@@ -4,12 +4,11 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/canary: "true"
   name: lb-helloapp
   namespace: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
 spec:
   rules:
-  - host: xip.io
+  - host: lb-helloapp.23.100.31.159.xip.io
     http:
       paths:
       - backend:
