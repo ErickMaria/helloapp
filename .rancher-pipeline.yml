@@ -20,7 +20,7 @@ stages:
   - runScriptConfig:
       image: golang:latest
       shellScript: |-
-        curl -u "token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc" \
+        curl -k -u "token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc" \
         -X POST \
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
