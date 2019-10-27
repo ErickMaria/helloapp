@@ -22,7 +22,7 @@ stages:
       shellScript: |-
         curl -k -s -X POST \
           https://23.100.28.108/v3/clusters/c-7f9bf/namespaces \
-          -H 'Authorization: Bearer $API_TOKEN' \
+          -H 'Authorization: Bearer p-sr6dq-pipeline:j9hvp29khnmxgjktcwmlgcg6f4b6pz9h6fj45m45z88qhxgl2wc447' \
           -H 'Content-Type: application/json' \
           -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-7f9bf:p-sr6dq", "resourceQuota":null}'
   - applyYamlConfig:
