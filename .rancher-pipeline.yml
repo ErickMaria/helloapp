@@ -28,7 +28,11 @@ stages:
         'https://23.100.28.108/v3/cluster/c-7f9bf/namespaces'
 
         sleep 10
-  - applyYamlConfig:
-      path: ./deployment.yaml
+  - runScriptConfig:
+      image: emrds/rancher-kubectl
+      shellScript: |-
+        rancher login https://23.100.28.108/ --token token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc --skip-veri
+        fy
+        rancher kubectl apply -f https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
 timeout: 60
 notification: {}
