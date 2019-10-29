@@ -27,7 +27,7 @@ stages:
         -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-mvdt8:p-s5xh6", "resourceQuota":null}' \
         'https://35.196.211.203/v3/cluster/c-7f9bf/namespaces'
   - runScriptConfig:
-      image: emrds/rancher-kubectl
+      image: emrds/rancher-kubectl:v2.3.1
       shellScript: |-
         rancher login https://35.196.211.203/ --token token-hwrzz:gtv62pdcbdzmf9zw576q4l8wjtqhg5ng57rmckpfmdw6sdw5msz6xw --skip-veri
         fy
