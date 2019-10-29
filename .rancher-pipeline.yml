@@ -25,7 +25,7 @@ stages:
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
         -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-mvdt8:p-s5xh6", "resourceQuota":null}' \
-        'https://35.196.211.203/v3/cluster/c-7f9bf/namespaces'
+        'https://35.196.211.203/v3/cluster/c-mvdt8/namespaces'
   - applyYamlConfig:
       path: ./deployment.yaml
 timeout: 60
