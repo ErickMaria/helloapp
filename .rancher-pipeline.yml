@@ -19,20 +19,18 @@ stages:
   steps:
   - runScriptConfig:
       image: golang:latest
-      shellScript: |-
-        curl -k -u "token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc" \
+      shellScript: |
+        curl -k -u "token-hwrzz:gtv62pdcbdzmf9zw576q4l8wjtqhg5ng57rmckpfmdw6sdw5msz6xw" \
         -X POST \
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
-        -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-7f9bf:p-sr6dq", "resourceQuota":null}' \
-        'https://23.100.28.108/v3/cluster/c-7f9bf/namespaces'
-
-        sleep 10
+        -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-mvdt8:p-s5xh6", "resourceQuota":null}' \
+        'https://35.196.211.203/v3/cluster/c-7f9bf/namespaces'
   - runScriptConfig:
       image: emrds/rancher-kubectl
       shellScript: |-
-        rancher login https://23.100.28.108/ --token token-z7h7d:2dwckxhq4xjjcsx7pl5mppzq6ft6mnkxvvk8z99k7kbz8lgqnbs6gc --skip-veri
+        rancher login https://35.196.211.203/ --token token-hwrzz:gtv62pdcbdzmf9zw576q4l8wjtqhg5ng57rmckpfmdw6sdw5msz6xw --skip-veri
         fy
-        rancher kubectl apply -f https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
+        rancher kubectl -f https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
 timeout: 60
 notification: {}
