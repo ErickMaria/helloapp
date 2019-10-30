@@ -22,7 +22,6 @@ stages:
       shellScript: |-
         rancher login https://35.196.211.203/ --token token-9fpvl:mhv56mf77685dvczz668jm98znrb8rj28rz9kb28wsvpdvpg6wzzcq --skip-verify
         rancher kubectl create namespace ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
-        kubectl apply
         cat <<EOF | kubectl apply -f -
         ---
         apiVersion: extensions/v1beta1
