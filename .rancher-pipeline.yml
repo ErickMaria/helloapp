@@ -24,7 +24,7 @@ stages:
         -X POST \
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
-        -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-qz2tp:p-vmld8", "resourceQuota":null}' \
+        -d '{"containerDefaultResourceLimit":null, "name":"'${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}'", "projectId":"c-qz2tp:p-vmld8", "resourceQuota":null}' \
         'https://35.196.211.203/v3/cluster/c-qz2tp/namespaces'
   - runScriptConfig:
       image: emrds/rancher-kubectl:v2.2.0
