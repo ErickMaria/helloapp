@@ -30,8 +30,70 @@ stages:
       image: emrds/rancher-kubectl:v2.2.0
       shellScript: |-
         rancher login https://35.196.211.203/ --token token-9fpvl:mhv56mf77685dvczz668jm98znrb8rj28rz9kb28wsvpdvpg6wzzcq --skip-verify
-        apk add curl
-        curl -O https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
-        rancher kubectl apply -f deployment.yaml
+        # apk add curl
+        # curl -O https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
+        # rancher kubectl apply -f deployment.yaml
+        cat <<EOF | rancher kubectl apply -f -
+        ---
+        apiVersion: extensions/v1beta1
+        kind: Ingress
+        metadata:
+          annotations:
+            kubernetes.io/ingress.class: "nginx"
+          name: lb-helloapp
+          namespace: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+        spec:
+          rules:
+          - host: lb-helloapp.23.100.31.159.xip.io
+            http:
+              paths:
+              - backend:
+                  serviceName: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+                  servicePort: 8081
+
+        ---
+        kind: Service
+        apiVersion: v1
+        metadata:
+          name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+          namespace: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+        spec:
+          selector:
+            app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+          type: ClusterIP
+          ports:
+            - protocol: TCP
+              port: 8081
+              targetPort: 8081
+
+        ---
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          annotations:
+            kubernetes.io/ingress.class: "nginx"
+            nginx.ingress.kubernetes.io/canary: "true"
+          name: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+          namespace: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+          labels:
+            app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+          template:
+            metadata:
+              labels:
+                app: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
+            spec:
+              imagePullSecrets:
+              - name: pipeline-docker-registry
+              containers:
+              - name: ${CICD_GIT_REPO_NAME}
+                image: ${CICD_IMAGE}:v${CICD_EXECUTION_SEQUENCE}
+                ports:
+                - containerPort: 8081
+        EOF
 timeout: 60
 notification: {}
