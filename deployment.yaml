@@ -8,7 +8,7 @@ metadata:
   namespace: ${CICD_GIT_REPO_NAME}-v${CICD_EXECUTION_SEQUENCE}
 spec:
   rules:
-  - host: lb-helloapp.23.100.31.159.xip.io
+  - host: lb-helloapp.34.66.24.54.xip.io
     http:
       paths:
       - backend:
