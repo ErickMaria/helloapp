@@ -30,6 +30,6 @@ stages:
       image: emrds/rancher-kubectl:v2.2.0
       shellScript: |-
         rancher login https://35.196.211.203/ --token token-9fpvl:mhv56mf77685dvczz668jm98znrb8rj28rz9kb28wsvpdvpg6wzzcq --skip-verify
-        rancher kubectl -f https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
+        rancher kubectl apply -f https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
 timeout: 60
 notification: {}
