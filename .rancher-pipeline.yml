@@ -30,10 +30,7 @@ stages:
       image: emrds/rancher-kubectl:v2.2.0
       shellScript: |-
         rancher login https://35.196.211.203/ --token token-9fpvl:mhv56mf77685dvczz668jm98znrb8rj28rz9kb28wsvpdvpg6wzzcq --skip-verify
-        # apk add curl
-        # curl -O https://raw.githubusercontent.com/ErickMaria/helloapp/master/deployment.yaml
-        # rancher kubectl apply -f deployment.yaml
-        cat <<EOF | rancher kubectl apply -f -
+        ancher kubectl apply -f <<EOF
         ---
         apiVersion: extensions/v1beta1
         kind: Ingress
